@@ -1,12 +1,14 @@
 #!/usr/bin/python2.6
 #-*-coding: utf-8-*-
 import os
+import signal
 import sys
 import urllib2
 import xml.etree.ElementTree as ET
 import subprocess
 import ConfigParser
 import time
+import re
 
 def soapConn(contentText):
     soap_url = 'http://10.108.17.166:8210/SvcMgr'
@@ -26,6 +28,7 @@ usertaskLog = "/sms/smslog/usertask/uol190.03.44"
 workorderLog = "/sms/smslog/usertask/workorder.log"
 # Get the dir of python script locate in.
 #realdir = os.path.split(os.path.realpath(__file__))[0]
+patten = re.compile(r'<sessionId>(.*?)</sessionId>')
 
 # Get current working dir
 #it can use below method or
@@ -34,12 +37,22 @@ workorderLog = "/sms/smslog/usertask/workorder.log"
 
 realdir = os.getcwd()
 
+command1 = 'exec tail -f ' + wsagentLog + ' > ' + realdir + '/wsagent.log'
+command2 = 'exec tail -f ' + usertaskLog + ' > ' + realdir + '/usertask.log'
+command3 = 'exec tail -f ' + usertaskLog + ' > ' + realdir + '/workorder.log'
+
+outputLog =  realdir + '/output.txt'
+
 
 if len(sys.argv) < 2:
     print "Please input Action Template file name."
     quit()
 
 ActionTemp = sys.argv[1]
+
+origin = sys.stdout
+f = open(outputLog, 'wb')
+sys.stdout = f
 
 print "Action template: ", ActionTemp
 
@@ -60,6 +73,7 @@ sessionid = root.findall('.//'+ns1+'sessionId')[0].text
 print "Session ID: ",sessionid
 
 
+
 print "-------------------------------------------------------------------------"
 
 print "Req XML: "
@@ -68,7 +82,14 @@ print
 with open (ActionTemp, "r") as f:
     datatemplate = f.read()
 
-contentData = datatemplate % sessionid
+
+#contentData = datatemplate % sessionid
+
+contentData = patten.sub("<sessionId>" + sessionid + "</sessionId>",datatemplate)
+
+
+#contentData = patten.sub(sessionid,contentText)
+
 
 print contentData
 
@@ -80,11 +101,19 @@ print
 
 # Start monitor Logs
 
-p1 = subprocess.Popen('tail -f ' + wsagentLog + ' > ' + realdir + '/wsagent.log', shell = True)
-#pid1 = p1.pid
-p2 = subprocess.Popen('tail -f ' + usertaskLog + ' > ' + realdir + '/usertask.log', shell = True)
-p3 = subprocess.Popen('tail -f ' + workorderLog + ' > ' + realdir + '/workorder.log', shell = True)
+#p1 = subprocess.Popen('exec tail -f ' + wsagentLog + ' > ' + realdir + '/wsagent.log', shell = True)
+#p2 = subprocess.Popen('exec tail -f ' + usertaskLog + ' > ' + realdir + '/usertask.log', shell = True)
+#p3 = subprocess.Popen('exec tail -f ' + usertaskLog + ' > ' + realdir + '/workorder.log', shell = True)
 
+p1 = subprocess.Popen(command1, shell = True)
+p2 = subprocess.Popen(command2, shell = True)
+p3 = subprocess.Popen(command3, shell = True)
+
+
+
+#pid1 = p1.pid
+#command3 = 'tail -f ' + workorderLog + ' > ' + realdir + '/workorder.log'
+#command3list = command3.split()
 
 # Start send soap request
 
@@ -102,6 +131,7 @@ print stdoutdata
 
 respXML = stdoutdata.splitlines()[-1]
 
+
 end_time = time.localtime()
 
 '''
@@ -109,9 +139,21 @@ respXML = soapConn(contentData)
 '''
 
 # Stop monitor Logs
-p1.kill()
-p2.kill()
-p3.kill()
+
+'''
+p1.send_signal(signal.SIGINT)
+p1.send_signal(signal.SIGTERM)
+p2.send_signal(signal.SIGINT)
+p3.send_signal(signal.SIGINT)
+
+#p3.wait()
+'''
+
+p1.terminate()
+p2.terminate()
+p3.terminate()
+
+
 
 #print logcontent
 
@@ -119,7 +161,7 @@ p3.kill()
 
 print "-------------------------------------------------------------------------"
 
-print "Parsed Restp XML (for manul test analyses only)"
+print "Parsed Resp XML (for manul test analyses only)"
 print
 root = ET.fromstring(respXML)
 for item in root.findall('.//*'):
@@ -142,3 +184,9 @@ print "Action template: ", ActionTemp
 print "Start Time: ", time.asctime(start_time)
 print "End Time: ", time.asctime(end_time)
 #print os.path.split(os.path.realpath(__file__))
+
+sys.stdout = origin
+f.close()
+
+with open(outputLog, "r") as f:
+    print f.read()
