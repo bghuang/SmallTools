@@ -15,12 +15,16 @@ req.add_header('Content-type', 'text/xml;charset=utf-8')
 resp = urllib2.urlopen(req, contentText)
 respXML = resp.read()
 
-ns ={'S': 'http://schemas.xmlsoap.org/soap/envelope/'}
-
 root = ET.fromstring(respXML)
 sessionid = root.findall('.//'+ns1+'sessionId')[0].text
 print sessionid
 
 tree = ET.parse("/shome/sms/soap_config/35.create_group_account.txt")
 root = tree.getroot()
-ET.dump(root)
+
+for elem in root.findall('.//'+ns1+'sessionId'):
+    elem.text = sessionid
+
+reqdata = ET.tostring(root, "utf-8")
+
+print reqdata
