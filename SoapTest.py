@@ -1,6 +1,12 @@
+#!/usr/bin/python2.6
+#-*-coding: utf-8-*-
+import os
+import sys
+import urllib2
 import xml.etree.ElementTree as ET
 import subprocess
 import ConfigParser
+import time
 
 def soapConn(contentText):
     soap_url = 'http://10.108.17.166:8210/SvcMgr'
@@ -15,6 +21,11 @@ LoginTem = '/shome/sms/soap_config/1.login.op.txt'
 LogoutTem = '/shome/sms/soap_config/2.logout.op.txt'
 ActionTemp = "/shome/sms/soap_config/35.create_group_account.txt"
 command = 'lwp-request -m POST -c "text/xml; charset=utf-8" -H "SOAPAction:" -ses http://10.108.17.166:8210/SvcMgr'
+wsagentLog ="/sms/smslog/wsagent/wsagent_0"
+usertaskLog = "/sms/smslog/usertask/uol190.03.44"
+workorderLog = "/sms/smslog/usertask/workorder.log"
+realdir = os.path.split(os.path.realpath(__file__))[0]
+
 
 if len(sys.argv) < 2:
     print "Please input Action Template file name."
@@ -59,6 +70,18 @@ print "-------------------------------------------------------------------------
 print "Resp Result:"
 print
 
+# Start monitor Logs
+
+p1 = subprocess.Popen('tail -f ' + wsagentLog + ' > ' + realdir + '/log/wsagent.log', shell = True)
+#pid1 = p1.pid
+p2 = subprocess.Popen('tail -f ' + usertaskLog + ' > ' + realdir + '/log/usertask.log', shell = True)
+p3 = subprocess.Popen('tail -f ' + workorderLog + ' > ' + realdir + '/log/workorder.log', shell = True)
+
+
+# Start send soap request
+
+start_time = time.localtime()
+
 subproc = subprocess.Popen([command],stdin=subprocess.PIPE, stdout = subprocess.PIPE, stderr = subprocess.PIPE, shell = True)
 
 #subproc.stdin,write(contentData)
@@ -71,10 +94,18 @@ print stdoutdata
 
 respXML = stdoutdata.splitlines()[-1]
 
-'''
-respXML = soapConn(contentData)
+end_time = time.localtime()
 
 '''
+respXML = soapConn(contentData)
+'''
+
+# Stop monitor Logs
+p1.kill()
+p2.kill()
+p3.kill()
+
+#print logcontent
 
 #print respXML
 
@@ -100,3 +131,6 @@ respXML = soapConn(contentData)
 print "-------------------------------------------------------------------------"
 print "Session ID: ", sessionid
 print "Action template: ", ActionTemp
+print "Start Time: ", time.asctime(start_time)
+print "End Time: ", time.asctime(end_time)
+#print os.path.split(os.path.realpath(__file__))
