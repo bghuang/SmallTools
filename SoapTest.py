@@ -1,5 +1,5 @@
-import urllib2
 import xml.etree.ElementTree as ET
+import subprocess
 import ConfigParser
 
 def soapConn(contentText):
@@ -12,27 +12,23 @@ def soapConn(contentText):
 
 ns1 = "{http://alcatel-lucent.com/esm/ws/svcmgr/V2_0}"
 LoginTem = '/shome/sms/soap_config/1.login.op.txt'
+LogoutTem = '/shome/sms/soap_config/2.logout.op.txt'
 ActionTemp = "/shome/sms/soap_config/35.create_group_account.txt"
+command = 'lwp-request -m POST -c "text/xml; charset=utf-8" -H "SOAPAction:" -ses http://10.108.17.166:8210/SvcMgr'
 
+if len(sys.argv) < 2:
+    print "Please input Action Template file name."
+    quit()
 
-config = ConfigParser.SafeConfigParser()
-with open("test_config.cfg","rb") as cfgfile:
-    config.readfp(cfgfile)
-    sessionid =config.get("info","SessionID")
-print "sid:",sessionid
+ActionTemp = sys.argv[1]
 
+print "Action template: ", ActionTemp
 
+# Login
 
-#for elem in root.findall('.//'+ns1+'faultstring'):
-#    print elem.text
-
-#with open("test_config.cfg","wb") as cfgfile:
-#    config.set("info","SessionID", "2")
-#    config.write(cfgfile)
-
-'''
 with open(LoginTem,'r') as loginReq:
     contentText = loginReq.read()
+
 
 respXML = soapConn(contentText)
 
@@ -41,9 +37,8 @@ respXML = soapConn(contentText)
 root = ET.fromstring(respXML)
 sessionid = root.findall('.//'+ns1+'sessionId')[0].text
 
-'''
 
-#print "Session ID: ",sessionid
+print "Session ID: ",sessionid
 
 
 print "-------------------------------------------------------------------------"
@@ -59,14 +54,29 @@ contentData = datatemplate % sessionid
 print contentData
 
 
+
 print "-------------------------------------------------------------------------"
-print "Resp XML:"
+print "Resp Result:"
 print
-contentText = contentData
-respXML = soapConn(contentText)
-print respXML
+
+subproc = subprocess.Popen([command],stdin=subprocess.PIPE, stdout = subprocess.PIPE, stderr = subprocess.PIPE, shell = True)
+
+#subproc.stdin,write(contentData)
+stdoutdata,stderrdata = subproc.communicate(contentData)
+
+#print "subproc.returncode: ",subproc.returncode
+#print "stdoutdata: "
+print stdoutdata
+#print "stderrdata: ", stderrdata
+
+respXML = stdoutdata.splitlines()[-1]
 
 '''
+respXML = soapConn(contentData)
+
+'''
+
+#print respXML
 
 print "-------------------------------------------------------------------------"
 
@@ -76,4 +86,17 @@ root = ET.fromstring(respXML)
 for item in root.findall('.//*'):
    print item.tag, " : ", item.text
 
-'''
+
+
+#Logout
+with open(LogoutTem,'r') as logoutReq:
+    contentText = logoutReq.read()
+
+contentData = contentText % sessionid
+
+
+respXML = soapConn(contentData)
+
+print "-------------------------------------------------------------------------"
+print "Session ID: ", sessionid
+print "Action template: ", ActionTemp
