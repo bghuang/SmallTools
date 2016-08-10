@@ -1,5 +1,3 @@
-#!/usr/bin/python2.6
-import sys
 import urllib2
 import xml.etree.ElementTree as ET
 import ConfigParser
@@ -14,19 +12,25 @@ def soapConn(contentText):
 
 ns1 = "{http://alcatel-lucent.com/esm/ws/svcmgr/V2_0}"
 LoginTem = '/shome/sms/soap_config/1.login.op.txt'
-LogoutTem = '/shome/sms/soap_config/2.logout.op.txt'
 ActionTemp = "/shome/sms/soap_config/35.create_group_account.txt"
 
-if len(sys.argv) < 2:
-    print "Please input Action Template file name."
-    quit()
 
-ActionTemp = sys.argv[1]
+config = ConfigParser.SafeConfigParser()
+with open("test_config.cfg","rb") as cfgfile:
+    config.readfp(cfgfile)
+    sessionid =config.get("info","SessionID")
+print "sid:",sessionid
 
-print "Action template: ", ActionTemp
 
-# Login
 
+#for elem in root.findall('.//'+ns1+'faultstring'):
+#    print elem.text
+
+#with open("test_config.cfg","wb") as cfgfile:
+#    config.set("info","SessionID", "2")
+#    config.write(cfgfile)
+
+'''
 with open(LoginTem,'r') as loginReq:
     contentText = loginReq.read()
 
@@ -37,8 +41,9 @@ respXML = soapConn(contentText)
 root = ET.fromstring(respXML)
 sessionid = root.findall('.//'+ns1+'sessionId')[0].text
 
+'''
 
-print "Session ID: ",sessionid
+#print "Session ID: ",sessionid
 
 
 print "-------------------------------------------------------------------------"
@@ -54,13 +59,14 @@ contentData = datatemplate % sessionid
 print contentData
 
 
-
 print "-------------------------------------------------------------------------"
 print "Resp XML:"
 print
-respXML = soapConn(contentData)
+contentText = contentData
+respXML = soapConn(contentText)
 print respXML
 
+'''
 
 print "-------------------------------------------------------------------------"
 
@@ -70,17 +76,4 @@ root = ET.fromstring(respXML)
 for item in root.findall('.//*'):
    print item.tag, " : ", item.text
 
-
-
-#Logout
-with open(LogoutTem,'r') as logoutReq:
-    contentText = logoutReq.read()
-
-contentData = contentText % sessionid
-
-
-respXML = soapConn(contentData)
-
-print "-------------------------------------------------------------------------"
-print "Session ID: ", sessionid
-print "Action template: ", ActionTemp
+'''
