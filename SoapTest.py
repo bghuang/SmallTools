@@ -24,7 +24,15 @@ command = 'lwp-request -m POST -c "text/xml; charset=utf-8" -H "SOAPAction:" -se
 wsagentLog ="/sms/smslog/wsagent/wsagent_0"
 usertaskLog = "/sms/smslog/usertask/uol190.03.44"
 workorderLog = "/sms/smslog/usertask/workorder.log"
-realdir = os.path.split(os.path.realpath(__file__))[0]
+# Get the dir of python script locate in.
+#realdir = os.path.split(os.path.realpath(__file__))[0]
+
+# Get current working dir
+#it can use below method or
+#    print os.path.abspath(os.curdir)
+#    print os.path.abspath('.')
+
+realdir = os.getcwd()
 
 
 if len(sys.argv) < 2:
@@ -72,10 +80,10 @@ print
 
 # Start monitor Logs
 
-p1 = subprocess.Popen('tail -f ' + wsagentLog + ' > ' + realdir + '/log/wsagent.log', shell = True)
+p1 = subprocess.Popen('tail -f ' + wsagentLog + ' > ' + realdir + '/wsagent.log', shell = True)
 #pid1 = p1.pid
-p2 = subprocess.Popen('tail -f ' + usertaskLog + ' > ' + realdir + '/log/usertask.log', shell = True)
-p3 = subprocess.Popen('tail -f ' + workorderLog + ' > ' + realdir + '/log/workorder.log', shell = True)
+p2 = subprocess.Popen('tail -f ' + usertaskLog + ' > ' + realdir + '/usertask.log', shell = True)
+p3 = subprocess.Popen('tail -f ' + workorderLog + ' > ' + realdir + '/workorder.log', shell = True)
 
 
 # Start send soap request
