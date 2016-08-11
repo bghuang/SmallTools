@@ -32,8 +32,12 @@ def usage():
     print
     print 'Mandatory arguments to long options are mandatory for short options too.'
     print '    [START TIME], [END TIME] format is Hh:Mn'
+    print
+    print "        -h, --help     display this help and exit"
+    print "        -v, --version  output version information and exit"
     print "Example:"
     print '    collectocslog 07:01 08:01'
+
 
 '''
 
