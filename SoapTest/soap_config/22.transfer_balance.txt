@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+<S:Body>
+
+<SubmitRequest xmlns="http://alcatel-lucent.com/esm/ws/svcmgr/V2_0">
+    <SessionInfo>
+        <sessionId>173380</sessionId>
+    </SessionInfo>
+
+    <RequestInfo>
+        <ReqID></ReqID>
+    </RequestInfo>
+
+
+    <TaskList>
+        <Task>
+            <Name>Transfer Balance</Name>
+            <ParamList>
+                <Param>
+                    <Name>Source Account ID</Name>
+                    <Value>886906000019</Value>
+                </Param>
+               <Param>
+                    <Name>Owner Name</Name>
+                    <Value>corc</Value>
+                </Param>
+                <Param>
+                    <Name>Target Account ID</Name>
+                    <Value>886906000015</Value>
+                </Param>
+                <Param>
+                    <Name>Amount</Name>
+                    <Value>2</Value>
+                </Param>
+                <Param>
+                    <Name>Transaction ID</Name>
+                    <Value>MsgSoap022</Value>
+                </Param>
+            </ParamList>
+        </Task>
+    </TaskList>
+</SubmitRequest>
+
+
+</S:Body>
+</S:Envelope>
+

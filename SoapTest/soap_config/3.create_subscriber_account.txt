@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+<S:Body>
+
+<SubmitRequest xmlns="http://alcatel-lucent.com/esm/ws/svcmgr/V2_0">
+    <SessionInfo>
+        <sessionId>213896</sessionId>
+    </SessionInfo>
+
+    <RequestInfo>
+        <ReqID></ReqID>
+    </RequestInfo>
+
+    <NERoutingInfo>
+        <NeGroupName>inasgrp</NeGroupName>
+    </NERoutingInfo>
+
+    <TaskList>
+        <Task>
+            <Name>Create Subscriber Account</Name>
+            <ParamList>
+                <Param>
+                    <Name>Account ID</Name>
+                    <Value>886906000015</Value>
+                </Param>
+                <Param>
+                    <Name>Class of Service ID</Name>
+                    <Value>P4G1510300</Value>
+                </Param>
+                <Param>
+                    <Name>Language Label</Name>
+                    <Value>en_01</Value>
+                </Param>
+                <Param>
+                    <Name>Provider ID</Name>
+                    <Value>2000</Value>
+                </Param>
+                <Param>
+                    <Name>Owner Name</Name>
+                    <Value>corc</Value>
+                </Param>
+                <Param>
+                    <Name>SCP Name</Name>
+                    <Value>OCS107</Value>
+                </Param>
+                <Param>
+                    <Name>Currency Label</Name>
+                    <Value>NTD</Value>
+                </Param>
+                <Param>
+                    <Name>Primary Balance Payment Type</Name>
+                    <Value>PrePaid</Value>
+                </Param>
+                <Param>
+                    <Name>Primary Balance</Name>
+                    <Value>29999</Value>
+                </Param>
+                <Param>
+                    <Name>Prepaid user</Name>
+                    <Value>Y</Value>
+                </Param>
+                <Param>
+                    <Name>SIM Credit Expiry Date</Name>
+                    <Value>20260602</Value>
+                </Param>
+                <Param>
+                    <Name>Ecommerce Enabled</Name>
+                    <Value>Y</Value>
+                </Param>
+                <Param>
+                    <Name>SIM State</Name>
+                    <Value>PREACTIVE</Value>
+                </Param>
+                <Param>
+                    <Name>City Partner Friends Opt</Name>
+                    <Value>F</Value>
+                </Param>
+                <Param>
+                    <Name>Friends And Family Dialli</Name>
+                    <Value>Y</Value>
+                </Param>
+                <Param>
+                    <Name>Friends And Family Modifi</Name>
+                    <Value>Y</Value>
+                </Param>
+                <Param>
+                    <Name>F And F Dial Flag</Name>
+                    <Value>Y</Value>
+                </Param>
+                <Param>
+                    <Name>Diameter Enabled</Name>
+                    <Value>Y</Value>
+                </Param>
+                <Param>
+                    <Name>SMS Notification Allowed</Name>
+                    <Value>Y</Value>
+                </Param>
+                <Param>
+                    <Name>Balance Transfer Allowed</Name>
+                    <Value>Y</Value>
+                </Param>
+                <Param>
+                    <Name>Generate AMA</Name>
+                    <Value>Y</Value>
+                </Param>
+                <Param>
+                    <Name>Transaction ID</Name>
+                    <Value>MsgSoap003</Value>
+                </Param>
+            </ParamList>
+        </Task>
+    </TaskList>
+</SubmitRequest>
+
+</S:Body>
+</S:Envelope>
+

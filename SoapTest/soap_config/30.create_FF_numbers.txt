@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+<S:Body>
+
+<SubmitRequest xmlns="http://alcatel-lucent.com/esm/ws/svcmgr/V2_0">
+    <SessionInfo>
+        <sessionId>213850</sessionId>
+    </SessionInfo>
+
+    <RequestInfo>
+        <ReqID></ReqID>
+    </RequestInfo>
+
+    <NERoutingInfo>
+        <NeGroupName>inasgrp</NeGroupName>
+    </NERoutingInfo>
+
+    <TaskList>
+        <Task>
+            <Name>Create Friends and Family Numbers</Name>
+            <ParamList>
+                <Param>
+                    <Name>Account ID</Name>
+                    <Value>886906000012</Value>
+                </Param>
+               <Param>
+                    <Name>Owner Name</Name>
+                    <Value>corc</Value>
+                </Param>
+                <Param>
+                    <Name>Account Type</Name>
+                    <Value>Subscriber</Value>
+                </Param>
+                <Param>
+                    <Name>Charge for Update</Name>
+                    <Value>N</Value>
+                </Param>
+               <Param>
+                    <Name>FF Type</Name>
+                    <Value>Normal</Value>
+                </Param>
+               <Param>
+                    <Name>FF Number 1</Name>
+                    <Value>886906000016</Value>
+                </Param>
+               <Param>
+                    <Name>MOC Flag 1</Name>
+                    <Value>Y</Value>
+                </Param>
+                <Param>
+                    <Name>Transaction ID</Name>
+                    <Value>MsgSoap030</Value>
+                </Param>
+            </ParamList>
+        </Task>
+    </TaskList>
+</SubmitRequest>
+
+
+</S:Body>
+</S:Envelope>
+

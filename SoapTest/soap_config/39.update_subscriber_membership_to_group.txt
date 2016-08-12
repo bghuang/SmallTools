@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+<S:Body>
+
+<SubmitRequest xmlns="http://alcatel-lucent.com/esm/ws/svcmgr/V2_0">
+    <SessionInfo>
+        <sessionId>%s</sessionId>
+    </SessionInfo>
+
+    <RequestInfo>
+        <ReqID></ReqID>
+    </RequestInfo>
+
+    <NERoutingInfo>
+        <NeGroupName>inasgrp</NeGroupName>
+    </NERoutingInfo>
+
+    <TaskList>
+        <Task>
+            <Name>Update Subscriber Membership To Group</Name>
+            <ParamList>
+                <Param>
+                    <Name>Owner Name</Name>
+                    <Value>corc</Value>
+                </Param>
+                <Param>
+                    <Name>Account ID</Name>
+                    <Value>886906000016</Value>
+                </Param>
+                <Param>
+                    <Name>Group ID</Name>
+                    <Value>group1</Value>
+                </Param>
+                <Param>
+                    <Name>Billing Responsibility</Name>
+                    <Value>Y</Value>
+                </Param>
+                <Param>
+                    <Name>Group Definition ID</Name>
+                    <Value>GRP1</Value>
+                </Param>
+                <Param>
+                    <Name>Transaction ID</Name>
+                    <Value>MsgSoap035</Value>
+                </Param>
+            </ParamList>
+        </Task>
+    </TaskList>
+</SubmitRequest>
+
+</S:Body>
+</S:Envelope>
+

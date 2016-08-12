@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+<S:Body>
+
+<RetrieveRequest xmlns="http://alcatel-lucent.com/esm/ws/svcmgr/V2_0">
+    <SessionInfo>
+        <sessionId>172950</sessionId>
+    </SessionInfo>
+
+    <RequestInfo>
+        <ReqID></ReqID>
+    </RequestInfo>
+
+    <TaskList>
+        <Task>
+            <Name>Query All Subscriber Data</Name>
+	<QueryCriteria>
+                <Param>
+                    <Name>Account ID</Name>
+                    <Value>886906000016</Value>
+                </Param>
+                <Param>
+                    <Name>Owner Name</Name>
+                    <Value>corc</Value>
+                </Param>
+                <Param>
+                    <Name>Query Balance Info</Name>
+                    <Value>Y</Value>
+                </Param>
+                <Param>
+                    <Name>Query Bucket Info</Name>
+                    <Value>Y</Value>
+                </Param>
+                <Param>
+                    <Name>Query Bundle Info</Name>
+                    <Value>Y</Value>
+                </Param>
+                <Param>
+                    <Name>Query Bundle Sumamry Type</Name>
+                    <Value>All Bundles</Value>
+                </Param>
+                <Param>
+                    <Name>Query Group Membership Info</Name>
+                    <Value>Y</Value>
+                </Param>
+                <Param>
+                    <Name>Query FF Info</Name>
+                    <Value>Y</Value>
+                </Param>
+	</QueryCriteria>
+        </Task>
+    </TaskList>
+</RetrieveRequest>
+
+
+</S:Body>
+</S:Envelope>
+

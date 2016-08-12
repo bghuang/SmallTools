@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<soapenv:Body>
+  <LoginRequest xmlns="http://alcatel-lucent.com/esm/ws/svcmgr/V2_0">
+   <loginId>smsadm</loginId>
+   <passwd>eSMadm123</passwd>
+   <newPasswd></newPasswd>
+   <srcIP>10.108.17.166</srcIP>
+   <wsdlVersion>V_2</wsdlVersion>
+  </LoginRequest>
+ </soapenv:Body>
+</soapenv:Envelope>

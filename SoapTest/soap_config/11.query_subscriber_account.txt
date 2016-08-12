@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+<S:Body>
+
+<RetrieveRequest xmlns="http://alcatel-lucent.com/esm/ws/svcmgr/V2_0">
+    <SessionInfo>
+        <sessionId>213824</sessionId>
+    </SessionInfo>
+
+    <RequestInfo>
+        <ReqID></ReqID>
+    </RequestInfo>
+
+    <TaskList>
+        <Task>
+            <Name>Query Subscriber Account</Name>
+	<QueryCriteria>
+                <Param>
+                    <Name>Account ID</Name>
+                    <Value>886906000015</Value>
+                </Param>
+        </QueryCriteria>
+            <QueryData>
+                <Collection>
+                <CollectionName>Subscriber Account</CollectionName>
+                <Attributes>
+                    <item>Class of Service ID</item>
+                    <item>SCP Name</item>
+                </Attributes>
+                </Collection>
+            </QueryData>
+        </Task>
+    </TaskList>
+</RetrieveRequest>
+
+
+</S:Body>
+</S:Envelope>
+

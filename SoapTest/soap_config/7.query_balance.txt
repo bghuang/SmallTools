@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+<S:Body>
+
+<RetrieveRequest xmlns="http://alcatel-lucent.com/esm/ws/svcmgr/V2_0">
+    <SessionInfo>
+        <sessionId>173380</sessionId>
+    </SessionInfo>
+
+    <RequestInfo>
+        <ReqID></ReqID>
+    </RequestInfo>
+
+    <TaskList>
+        <Task>
+            <Name>Query Balance</Name>
+	<QueryCriteria>
+                <Param>
+                    <Name>Account ID</Name>
+                    <Value>886906000018</Value>
+                </Param>
+	</QueryCriteria>
+        </Task>
+    </TaskList>
+</RetrieveRequest>
+
+
+</S:Body>
+</S:Envelope>
+

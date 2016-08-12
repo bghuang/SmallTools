@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+<S:Body>
+
+<LogoutRequest xmlns="http://alcatel-lucent.com/esm/ws/svcmgr/V2_0">
+    <SessionInfo>
+         <sessionId>213822</sessionId>
+    </SessionInfo>
+</LogoutRequest>
+
+</S:Body>
+</S:Envelope>
+
+
